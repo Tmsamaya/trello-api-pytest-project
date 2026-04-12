@@ -2,7 +2,6 @@ import json
 
 from config import Config
 
-
 def debug_response(response):
     print("\n--- RESPONSE START ---")
     print("(status:)", response.status_code)

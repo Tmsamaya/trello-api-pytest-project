@@ -10,7 +10,7 @@ def board_factory():
     def _create_board(name=None, key=None, token=None):
 
         board_name = f"TestBoard" if name is None else name
-        url = "https://api.trello.com/1/boards/"
+        url = f"{Config.BASE_URL}/boards/"
 
         query = {
             'name': board_name,
@@ -29,12 +29,15 @@ def board_factory():
 
     #Teardown
     for board_id in created_boards:
-        delete_url = f"https://api.trello.com/1/boards/{board_id}"
+        delete_url = f"{Config.BASE_URL}/boards/{board_id}"
         query = {
             'key': Config.TRELLO_KEY,
             'token': Config.TRELLO_TOKEN
         }
-        requests.delete(delete_url, params=query)
+        response = requests.delete(delete_url, params=query)
+        print(f"\nDeleting board: {board_id}")
+        if response.status_code not in [200, 404]:
+            print(f"\nTeardown failed for board {board_id}: {response.status_code}")
 
 
 @pytest.fixture
@@ -44,7 +47,7 @@ def list_factory():
     def _create_list(board_id, name=None, key =None, token=None):
 
         list_name = f"TestList" if name is None else name
-        url = "https://api.trello.com/1/lists"
+        url = f"{Config.BASE_URL}/lists"
 
         query = {
             'name': list_name,
@@ -63,7 +66,7 @@ def list_factory():
     yield _create_list
 
     for list_id in created_lists:
-        delete_url = f"https://api.trello.com/1/lists/{list_id}"
+        delete_url = f"{Config.BASE_URL}/lists/{list_id}"
         query = {
             'key': Config.TRELLO_KEY,
             'token': Config.TRELLO_TOKEN
@@ -76,7 +79,7 @@ def card_factory():
     def _create_card(list_id, name=None, desc=None, key=None, token=None):
 
         card_name = f"TestCard" if name is None else name
-        url = "https://api.trello.com/1/cards"
+        url = f"{Config.BASE_URL}/cards"
 
         query = {
             'name': card_name,
@@ -97,7 +100,7 @@ def card_factory():
     yield _create_card
 
     for card_id in created_cards:
-        delete_url = f"https://api.trello.com/1/cards/{card_id}"
+        delete_url = f"{Config.BASE_URL}/cards/{card_id}"
         query = {
             'key': Config.TRELLO_KEY,
             'token': Config.TRELLO_TOKEN
