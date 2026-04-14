@@ -2,19 +2,15 @@
 
 A Python-based API testing framework built with **pytest** to validate Trello's REST API.
 
-This project demonstrates real-world QA automation practices by combining:
-- Factory-based test setup
-- Parametrized negative testing
-- End-to-end workflow validation
-- Clean debugging and logging
+This project demonstrates real-world QA automation practices, including structured test design, reusable test architecture, and CI-based execution.
 
 ---
 
 ## 🚀 Features
 
 - ✅ Full CRUD testing for Trello resources (Boards, Lists, Cards)
-- ✅ Factory-based test data creation (board_factory, list_factory, card_factory)
-- ✅ Parametrized negative tests (invalid/missing auth)
+- ✅ Factory-based test data creation (`board_factory`, `list_factory`, `card_factory`)
+- ✅ Parametrized negative tests (invalid/missing authentication)
 - ✅ Structured validation approach:
   - Structure
   - Schema
@@ -23,6 +19,7 @@ This project demonstrates real-world QA automation practices by combining:
 - ✅ End-to-end workflow test:
   - Create → Update → Move → Delete card
 - ✅ Debug helpers with safe credential handling
+- ✅ CI integration using GitHub Actions
 
 ---
 
@@ -31,6 +28,7 @@ This project demonstrates real-world QA automation practices by combining:
 - Python
 - Pytest
 - Requests
+- GitHub Actions (CI)
 - Trello REST API
 
 ---
@@ -38,43 +36,50 @@ This project demonstrates real-world QA automation practices by combining:
 ## ⚙️ Setup
 
 ### 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git  
-cd YOUR_REPO  
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
+```
 
 ### 2. Install dependencies
-pip install -r requirements.txt  
+```bash
+pip install -r requirements.txt
+```
 
 ### 3. Add your Trello credentials
 
-Create a `config.py` file:
+Create a `.env` file:
 
-TRELLO_KEY = "your_key"  
-TRELLO_TOKEN = "your_token"  
-BASE_URL = "https://api.trello.com/1"  
+```env
+TRELLO_KEY=your_key
+TRELLO_TOKEN=your_token
+```
 
 ---
 
 ## ▶️ Running Tests
 
-Run all tests:  
-pytest -v  
+Run all tests:
+```bash
+pytest -v
+```
 
-Run with debug output:  
-pytest -v -s  
+Run with debug output:
+```bash
+pytest -v -s
+```
 
 ---
 
 ## 🧪 Test Coverage
 
 ### Positive Tests
-
 - Create Board / List / Card
 - Validate response structure and schema
 - Verify data integrity
-- Validate business rules (default states, relationships)
+- Validate business rules
 
 ### Negative Tests
-
 - Missing token/key
 - Invalid token/key
 - Invalid list IDs
@@ -93,34 +98,42 @@ End-to-end scenario:
 
 ---
 
+## 📸 Test Execution
+
+### CI Pipeline (GitHub Actions)
+![CI Pipeline](screenshots/ci-pass.png)
+
+### Local Test Run (Pytest)
+![Pytest Run](screenshots/pytest-run.png)
+
+### CRUD Workflow Example
+![CRUD Workflow](screenshots/crud-workflow.png)
+
+---
+
 ## 💡 Key Design Decisions
 
 ### Factory Pattern
-
-Reusable fixtures generate test data dynamically:
-
-board_factory()  
-list_factory()  
-card_factory()  
+Reusable fixtures dynamically generate test data:
+- `board_factory()`
+- `list_factory()`
+- `card_factory()`
 
 ---
 
 ### Parametrized Testing
-
-Used to efficiently test multiple failure scenarios.
+Efficient validation of multiple failure scenarios using pytest parametrization.
 
 ---
 
 ### Debug Strategy
-
-Custom debug helpers provide structured output without exposing secrets.
+Custom debug helpers provide structured output while safely masking sensitive credentials.
 
 ---
 
 ## 📌 Future Improvements
 
 - Add schema validation with JSON Schema  
-- Integrate CI/CD (GitHub Actions)  
 - Add HTML reporting (pytest-html or Allure)  
 - Expand negative test coverage  
 
@@ -134,6 +147,7 @@ This project demonstrates:
 - Strong understanding of test design principles  
 - Translation of Postman testing into automated frameworks  
 - Clean, maintainable test architecture  
+- CI-integrated automated validation  
 
 ---
 
